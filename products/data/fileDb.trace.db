@@ -1,0 +1,12 @@
+2023-08-03 03:48:13 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CODE CHARACTER VARYING(10)": "'123456789ab' (11)"; SQL statement:
+insert into products (code,description,is_available,name,price_eur,price_usd,id) values (?,?,?,?,?,?,?) [22001-214]
+2023-08-03 03:53:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "CODE CHARACTER VARYING(10)": "'123456789ab' (11)"; SQL statement:
+insert into products (code,description,is_available,name,price_eur,price_usd,id) values (?,?,?,?,?,?,?) [22001-214]
+2023-08-03 04:07:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table products (is_available boolean, price_eur float(53) not null, price_usd DOUBLE[*](10,2) not null, id bigint not null, code varchar(10) not null unique, description varchar(255), name varchar(255) not null, primary key (id))"; expected "PRECISION, ARRAY, INVISIBLE, VISIBLE, NOT NULL, NULL, AS, DEFAULT, GENERATED, ON UPDATE, NOT NULL, NULL, AUTO_INCREMENT, DEFAULT ON NULL, NULL_TO_DEFAULT, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, NULL, CHECK, REFERENCES, AUTO_INCREMENT, ,, )"; SQL statement:
+create table products (is_available boolean, price_eur float(53) not null, price_usd DOUBLE(10,2) not null, id bigint not null, code varchar(10) not null unique, description varchar(255), name varchar(255) not null, primary key (id)) [42001-214]
+2023-08-03 04:07:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "PRODUCTS" not found (this database is empty); SQL statement:
+select p1_0.id,p1_0.code,p1_0.description,p1_0.is_available,p1_0.name,p1_0.price_eur,p1_0.price_usd from products p1_0 where p1_0.id=? [42104-214]

@@ -1,0 +1,196 @@
+openapi: 3.0.1
+info:
+  title: Products
+  description: Products REST api
+  contact:
+    email: timotea.strucelj@gmail.com
+  version: 1.0.0
+servers:
+  - url: //localhost:8080/
+paths:
+  /products:
+    get:
+      summary: Get all products
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  products:
+                    type: array
+                    items:
+                      required:
+                        - code
+                        - description
+                        - id
+                        - isAvailable
+                        - name
+                        - priceEur
+                        - priceUsd
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                          description: Primary key of product object (autoincrement)
+                          example: 1.0
+                        code:
+                          type: number
+                          description: Code of product object, unique value, exactly
+                            10 characters
+                        name:
+                          type: string
+                          description: Product name
+                          example: Product 1
+                        priceEur:
+                          type: number
+                          description: Product price in EUR, positive value
+                          example: 50.0
+                        priceUsd:
+                          type: number
+                          description: Product price in USD, positive value
+                          example: 50.0
+                        description:
+                          type: string
+                          description: Product description
+                          example: This is product description
+                        isAvailable:
+                          type: boolean
+                          description: Product availability
+                          example: true
+                          default: false
+        400:
+          description: Bad request
+          content: {}
+        500:
+          description: Server error
+          content: {}
+    post:
+      summary: Add new product
+      requestBody:
+        description: The product to create.
+        content:
+          'product':
+            schema:
+              required:
+                - code
+                - name
+                - priceEur
+              type: object
+              properties:
+                code:
+                  type: number
+                name:
+                  type: string
+                priceEur:
+                  type: number
+                description:
+                  type: string
+                isAvailable:
+                  type: boolean
+        required: true
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - name
+        400:
+          description: Bad request
+          content: {}
+        500:
+          description: Server error
+          content: {}
+      x-codegen-request-body-name: product
+  /product/{id}:
+    get:
+      summary: Get product by id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+
+        400:
+          description: Bad request
+          content: {}
+        500:
+          description: Server error
+          content: {}
+    put:
+      summary: Update product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      requestBody:
+        description: The product to create.
+        content:
+          '*/*':
+            schema:
+              required:
+                - code
+                - name
+                - priceEur
+              type: object
+              properties:
+                code:
+                  type: number
+                name:
+                  type: string
+                priceEur:
+                  type: number
+                description:
+                  type: string
+                isAvailable:
+                  type: boolean
+        required: false
+      responses:
+        200:
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Bad request
+          content: {}
+        500:
+          description: Server error
+          content: {}
+      x-codegen-request-body-name: product
+    delete:
+      summary: Delete product
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+      responses:
+        200:
+          description: Successful response
+          content: {}
+        400:
+          description: Bad request
+          content: {}
+        500:
+          description: Server error
+          content: {}
+components: {}
